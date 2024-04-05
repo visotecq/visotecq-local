@@ -18,11 +18,28 @@ import Testimonials from './components/Testimonials';
 import FAQ from './components/FAQ';
 import Footer from './components/Footer';
 import getLPTheme from '../getLPTheme';
+import Modal from '@mui/material/Modal';
+import SignIn from './components/SignIn';
+import SignUp from './components/SignUp';
+
 
 interface ToggleCustomThemeProps {
   showCustomTheme: Boolean;
   toggleCustomTheme: () => void;
 }
+
+const style = {
+  position: 'absolute' as 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
+
 
 function ToggleCustomTheme({
   showCustomTheme,
@@ -69,6 +86,16 @@ export default function Home() {
   const LPtheme = createTheme(getLPTheme(mode));
   const defaultTheme = createTheme({ palette: { mode } });
 
+  
+const [signinmodalopen, setSignInModalOpen] = React.useState(false);
+const handleOpenSignIn = () => setSignInModalOpen(true);
+const handleCloseSignIn = () => setSignInModalOpen(false);
+
+
+const [signupmodalopen, setSignUpModalOpen] = React.useState(false);
+const handleOpenSignUp = () => setSignUpModalOpen(true);
+const handleCloseSignUp = () => setSignUpModalOpen(false);
+
   const toggleColorMode = () => {
     setMode((prev) => (prev === 'dark' ? 'light' : 'dark'));
   };
@@ -79,7 +106,7 @@ export default function Home() {
   return (
     <ThemeProvider theme={showCustomTheme ? LPtheme : defaultTheme}>
       <CssBaseline />
-      <AppAppBar mode={mode} toggleColorMode={toggleColorMode} />
+      <AppAppBar mode={mode} toggleColorMode={toggleColorMode} OnSignInClick={handleOpenSignIn} OnSignUpClick={handleOpenSignUp} />
       <Hero />
       <Box sx={{ bgcolor: 'background.default' }}>
         <LogoCollection />
@@ -99,6 +126,26 @@ export default function Home() {
         showCustomTheme={showCustomTheme}
         toggleCustomTheme={toggleCustomTheme}
       /> */}
+            <Modal
+        open={signinmodalopen}
+        onClose={handleCloseSignIn}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+        >
+        <Box sx={style}>
+           <SignIn/>           
+        </Box>
+        </Modal>
+            <Modal
+        open={signupmodalopen}
+        onClose={handleCloseSignUp}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+        >
+        <Box sx={style}>
+           <SignUp/>           
+        </Box>
+        </Modal>
     </ThemeProvider>
   );
 }

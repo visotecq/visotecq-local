@@ -10,26 +10,28 @@ import Typography from '@mui/material/Typography';
 import MenuItem from '@mui/material/MenuItem';
 import Drawer from '@mui/material/Drawer';
 import MenuIcon from '@mui/icons-material/Menu';
-import ToggleColorMode from './ToggleColorMode';
-
 const logoStyle = {
   width: '140px',
   height: 'auto',
   cursor: 'pointer',
 };
 
+
 interface AppAppBarProps {
   mode: PaletteMode;
   toggleColorMode: () => void;
+  OnSignInClick : () => void;
+  OnSignUpClick : () => void;
 }
 
-function AppAppBar({ mode, toggleColorMode }: AppAppBarProps) {
+function AppAppBar({ mode, toggleColorMode,OnSignInClick,OnSignUpClick }: AppAppBarProps) {
   const [open, setOpen] = React.useState(false);
 
   const toggleDrawer = (newOpen: boolean) => () => {
     setOpen(newOpen);
   };
 
+  
   const scrollToSection = (sectionId: string) => {
     const sectionElement = document.getElementById(sectionId);
     const offset = 128;
@@ -148,7 +150,7 @@ function AppAppBar({ mode, toggleColorMode }: AppAppBarProps) {
                 variant="text"
                 size="small"
                 component="a"
-                href="/SignIn"
+                onClick={OnSignInClick}
               >
                 Sign in
               </Button>
@@ -157,7 +159,7 @@ function AppAppBar({ mode, toggleColorMode }: AppAppBarProps) {
                 variant="contained"
                 size="small"
                 component="a"
-                href="/SignUp"
+                onClick={OnSignUpClick}
               >
                 Sign up
               </Button>
@@ -231,6 +233,7 @@ function AppAppBar({ mode, toggleColorMode }: AppAppBarProps) {
               </Drawer>
             </Box>
           </Toolbar>
+    
         </Container>
       </AppBar>
     </div>
