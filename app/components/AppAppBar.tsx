@@ -212,8 +212,8 @@ function AppAppBar({ mode, toggleColorMode,OnSignInClick,OnSignUpClick }: AppApp
                       color="primary"
                       variant="contained"
                       component="a"
-                      href="/SignUp"
                       sx={{ width: '100%' }}
+                      onClick={OnSignUpClick}
                     >
                       Sign up
                     </Button>
@@ -223,8 +223,8 @@ function AppAppBar({ mode, toggleColorMode,OnSignInClick,OnSignUpClick }: AppApp
                       color="primary"
                       variant="outlined"
                       component="a"
-                      href="/SignIn"
                       sx={{ width: '100%' }}
+                      onClick={OnSignInClick}
                     >
                       Sign in
                     </Button>
